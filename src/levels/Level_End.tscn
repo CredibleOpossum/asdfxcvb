@@ -1,0 +1,22 @@
+[gd_scene load_steps=2 format=2]
+
+[ext_resource path="res://src/scripts/Win_Text.gd" type="Script" id=1]
+
+[node name="Node2D" type="Node2D"]
+
+[node name="WinText" type="RichTextLabel" parent="."]
+margin_left = -72.0
+margin_top = -24.0
+margin_right = 104.0
+margin_bottom = 32.0
+text = "Thanks for playing!
+
+Your final time was: --:--"
+script = ExtResource( 1 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Camera2D" type="Camera2D" parent="."]
+current = true
+zoom = Vector2( 0.5, 0.5 )

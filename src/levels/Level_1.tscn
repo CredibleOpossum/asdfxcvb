@@ -1,0 +1,55 @@
+[gd_scene load_steps=9 format=2]
+
+[ext_resource path="res://assets/tileset/tileset.tres" type="TileSet" id=1]
+[ext_resource path="res://src/actors/Player.tscn" type="PackedScene" id=2]
+[ext_resource path="res://src/hud/Timer.tscn" type="PackedScene" id=3]
+[ext_resource path="res://src/actors/Block.tscn" type="PackedScene" id=4]
+[ext_resource path="res://src/interactables/Gun_Pickup.tscn" type="PackedScene" id=5]
+[ext_resource path="res://src/particle/Shoot_Particle.tscn" type="PackedScene" id=6]
+[ext_resource path="res://src/interactables/Change_Level.tscn" type="PackedScene" id=7]
+[ext_resource path="res://src/interactables/Activate_On_Player_Touch.tscn" type="PackedScene" id=8]
+
+[node name="Level_1" type="TileMap"]
+tile_set = ExtResource( 1 )
+cell_size = Vector2( 32, 32 )
+format = 1
+tile_data = PoolIntArray( -65536, 0, 0, -65535, 0, 0, -65534, 0, 0, -65533, 0, 0, -65532, 0, 0, -65531, 0, 0, -65510, 0, 0, -65509, 0, 0, -65508, 0, 0, -65507, 0, 0, -65506, 0, 0 )
+
+[node name="Player" parent="." instance=ExtResource( 2 )]
+position = Vector2( 40, -40 )
+gun_particles = ExtResource( 6 )
+
+[node name="Timer" parent="." instance=ExtResource( 3 )]
+
+[node name="Block" parent="." instance=ExtResource( 4 )]
+position = Vector2( 176, -48 )
+friction = 0.0
+force_multipler = 0.2
+
+[node name="Gun Pickup" parent="." instance=ExtResource( 5 )]
+position = Vector2( 80, -40 )
+
+[node name="Triggers" type="Node" parent="."]
+
+[node name="Death Zone" parent="Triggers" instance=ExtResource( 8 )]
+visible = false
+position = Vector2( 1128, 368 )
+scale = Vector2( 1000, 0.33 )
+object = NodePath("../../Triggerables/Reset Level")
+
+[node name="Progress Level" parent="Triggers" instance=ExtResource( 7 )]
+visible = false
+Level_Path = "res://src/levels/Level_2.tscn"
+
+[node name="Triggerables" type="Node" parent="."]
+
+[node name="Reset Level" parent="Triggerables" instance=ExtResource( 7 )]
+visible = false
+position = Vector2( 36.1305, -371.987 )
+rotation = 0.0021043
+scale = Vector2( 0.25, 0.25 )
+Reset_Level = true
+
+[node name="Goal" parent="Triggerables" instance=ExtResource( 8 )]
+position = Vector2( 912, -56 )
+object = NodePath("../../Triggers/Progress Level")
